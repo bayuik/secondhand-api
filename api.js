@@ -7,8 +7,8 @@ var bodyParser    = require('body-parser')
 const app         = express();
 // parse application/json
 app.use(bodyParser.json())
-var rolePost         = require('./service/rolePost');
-var userPost         = require('./service/userPost');
+var rolePost         = require('./app/controller/rolePost');
+var userPost         = require('./app/controller/userPost');
 app.use(express.json());
 app.use(cors());
 
