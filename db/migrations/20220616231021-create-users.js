@@ -29,9 +29,6 @@ module.exports = {
       photo: {
         type: Sequelize.STRING
       },
-      role: {
-        type: Sequelize.ENUM('admin', 'buyer', 'seller')
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
