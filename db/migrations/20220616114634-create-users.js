@@ -29,13 +29,8 @@ module.exports = {
       photo: {
         type: Sequelize.STRING
       },
-      role_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Roles',
-          key: 'id'
-        },
+      role: {
+        type: Sequelize.ENUM('admin', 'buyer', 'seller')
       },
       createdAt: {
         allowNull: false,

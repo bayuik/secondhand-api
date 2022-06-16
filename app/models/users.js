@@ -21,14 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     phone: DataTypes.STRING,
     photo: DataTypes.STRING,
-    role_id: {
-      type:DataTypes.INTEGER,
-      references: {
-        model: 'Role',
-        key: 'id'
-      }
-     }
-    }, {
+    role: DataTypes.ENUM('admin', 'buyer', 'seller')
+  }, {
     sequelize,
     modelName: 'Users',
   });
