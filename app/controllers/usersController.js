@@ -28,9 +28,15 @@ const register = async (req, res) => {
 
   Users.create(newUsers)
     .then((Users) => {
+      const { id, role, name, email } = Users;
       res.status(201).json({
         status: "success",
-        data: Users,
+        data: {
+          id,
+          role,
+          name,
+          email,
+        },
       });
     })
     .catch((err) => {
