@@ -24,6 +24,7 @@
     "multiparty": "^4.2.3",
     "pg": "^8.7.3",
     "randomstring": "^1.2.2",
-    "sequelize": "^6.20.1"
+    "sequelize": "^6.20.1",
+    "sequelize-cli": "^6.4.1"
   }
 }

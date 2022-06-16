@@ -1,12 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { rolePost, userPost, getImages, login } = require("../app/controllers");
+const { register, login } = require("../app/controllers");
 
 router.get("/login", login);
-
-router.post("/rolePost", rolePost);
-router.post("/userPost", userPost);
-
-router.get("/images/:file", getImages);
+router.post("/register", register);
 
 module.exports = router;

@@ -1,10 +1,8 @@
-const { rolePost, userPost, getImages } = require("./usersController");
+const { register } = require("./usersController");
 const { login, authorize } = require("./authController");
 
 module.exports = {
-  rolePost,
-  userPost,
-  getImages,
+  register,
   login,
   authorize,
 };
