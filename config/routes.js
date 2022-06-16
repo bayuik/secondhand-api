@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { rolePost, userPost, getImages } = require("../app/controllers");
+const { rolePost, userPost, getImages, login } = require("../app/controllers");
 
-router.get("/login", (req, res) => {
-  res.send("login");
-});
+router.get("/login", login);
 
 router.post("/rolePost", rolePost);
 router.post("/userPost", userPost);
