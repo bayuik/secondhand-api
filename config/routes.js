@@ -1,20 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + ".jpg");
-  },
+const {getProducts, createProducts, deleteProducts, getDetaiProduct, updateProducts} = require('../app/controllers')
+
+
+const mul = require('multer');
+
+const storage = mul.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, './images');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
 });
-const upload = multer({ storage: storage });
-const { register, login, getUser, updateUser } = require("../app/controllers");
 
-router.post("/login", login);
-router.post("/register", register);
-router.put("/profile/:id", upload.single("photo"), updateUser);
-router.get("/profile/:id", getUser);
+const upload = mul({storage: storage})
 
+
+router.get("/product", getProducts);
+router.post("/product", upload.single('product_photo'),createProducts);
+router.delete("/productDelete/:id", deleteProducts);
+router.get("/product/:id", getDetaiProduct);
+router.put("/productEdit", upload.single('product_photo'),updateProducts)
 module.exports = router;
