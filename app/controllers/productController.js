@@ -27,14 +27,14 @@ const getProducts = async (req, res) => {
 };
 
 const createProducts = async (req, res) => {
-  console.log(req.file);
   let { product_name, price, category, description } = req.body;
+  const image = req.file ? req.file.filename : "";
   const productCreate = await Products.create({
-    product_name: product_name,
-    price: price,
-    category: category,
-    description: description,
-    product_photo: req.file.path,
+    product_name,
+    price,
+    category,
+    description,
+    product_photo: image,
   }).then((Products) => {
     return Products;
   });
@@ -68,7 +68,7 @@ const updateProducts = async (req, res) => {
   if (req.file) await deleteImage(id);
   let { product_name, price, category, description } = req.body;
   const image = req.file ? req.file.filename : "";
-  const productCreate = await Products.update(
+  const updateProduct = await Products.update(
     {
       product_name,
       price,
@@ -81,22 +81,26 @@ const updateProducts = async (req, res) => {
         id: id,
       },
     }
-  ).then((Products) => {
-    return Products;
-  });
-  res.status(201).json({
-    status: "update success",
-    data: {
-      productCreate,
-    },
-  });
+  )
+    .then((Products) => {
+      res.status(201).json({
+        status: "Success",
+        message: "Product Update Successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
 };
 
 const getDetailProduct = async (req, res) => {
   let { id } = req.params;
   const products = await Products.findOne({ where: { id: id } });
   res.status(201).json({
-    status: "list one product success",
+    status: "Success",
     data: {
       products,
     },
