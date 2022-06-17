@@ -1,6 +1,8 @@
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const fs = require("fs");
+let path = require("path");
 
 const encryptPassword = (password) => {
   return new Promise((resolve, reject) => {
@@ -12,6 +14,21 @@ const encryptPassword = (password) => {
 
       resolve(encryptedPassword);
     });
+  });
+};
+
+const deleteImage = async (id) => {
+  const user = await Users.findOne({
+    where: {
+      id: id,
+    },
+  });
+
+  const image = user.photo;
+  fs.unlink(`uploads/${image}`, (err) => {
+    if (err) {
+      return err;
+    }
   });
 };
 
@@ -47,6 +64,54 @@ const register = async (req, res) => {
     });
 };
 
+const getUser = (req, res) => {
+  Users.findByPk(req.params.id)
+    .then((user) => {
+      res.status(200).json({
+        status: "success",
+        data: user,
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
+};
+
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  if (req.file) await deleteImage(id);
+  const { name, city, address, phone } = req.body;
+  const image = req.file ? req.file.filename : "";
+  const updateUser = {
+    name,
+    city,
+    address,
+    phone,
+    photo: image,
+  };
+
+  Users.update(updateUser, {
+    where: { id },
+  })
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "User updated successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
+};
+
 module.exports = {
   register,
+  getUser,
+  updateUser,
 };
