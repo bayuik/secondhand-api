@@ -1,5 +1,6 @@
 const { register, getUser, updateUser } = require("./usersController");
 const { login, authorize } = require("./authController");
+const {createTransactions} = require('./transactionController')
 const { getProducts, createProducts, deleteProducts, getDetailProduct, updateProducts } = require("./productController");
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   deleteProducts,
   getDetailProduct,
   updateProducts,
+  createTransactions
 };
