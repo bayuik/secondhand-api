@@ -27,7 +27,7 @@ const getProducts = async (req, res) => {
 };
 
 const createProducts = async (req, res) => {
-  let { product_name, price, category, description } = req.body;
+  let { product_name, price, category, description, user_id } = req.body;
   const image = req.file ? req.file.filename : "";
   const productCreate = await Products.create({
     product_name,
@@ -35,6 +35,7 @@ const createProducts = async (req, res) => {
     category,
     description,
     product_photo: image,
+    user_id
   }).then((Products) => {
     return Products;
   });
