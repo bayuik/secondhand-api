@@ -35,7 +35,7 @@ const createProducts = async (req, res) => {
     category,
     description,
     product_photo: image,
-    user_id
+    user_id,
   }).then((Products) => {
     return Products;
   });
@@ -108,10 +108,27 @@ const getDetailProduct = async (req, res) => {
   });
 };
 
+const getUserProducts = async (req, res) => {
+  let {userId} = req.params;
+  console.log(userId);
+  const products = await Products.findAll({
+    where: {
+      user_id: userId,
+    }
+  })
+  res.status(201).json({
+    status: "Success",
+    data: {
+      products,
+    },
+  })
+}
+
 module.exports = {
   getProducts,
   createProducts,
   deleteProducts,
   updateProducts,
   getDetailProduct,
+  getUserProducts,
 };

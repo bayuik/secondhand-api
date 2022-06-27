@@ -1,6 +1,6 @@
 const {
   DB_USERNAME = "postgres",
-  DB_PASSWORD = "garut123",
+  DB_PASSWORD = "admin",
   DB_HOST = "localhost",
   DB_NAME = "secondhand",
   DB_DIALECT = "postgres"
