@@ -13,5 +13,5 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(router);
-app.use("/images",express.static('images'))
+app.use("/uploads",express.static('uploads'))
 module.exports = app;
