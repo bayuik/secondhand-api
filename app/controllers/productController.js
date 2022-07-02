@@ -16,26 +16,28 @@ const deleteImage = async (id) => {
   });
 };
 
-const getProducts = async (req, res) => {
-  const products = await Products.findAll()
-    .then((Products) => {
-      res.status(201).json({
-        status: "list success",
-        data: {
-          Products,
-        },
-      });
-    })
-    .catch((err) => {
-      res.status(422).json({
-        status: "error",
-        message: err.message,
-      });
-    });
+const countUserProduct = async (userId) => {
+  const countProduct = await Products.count({
+    where: {
+      user_id: parseInt(userId),
+    },
+  });
+
+  if (countProduct >= 4) return false;
+  return true;
 };
 
 const createProducts = async (req, res) => {
   let { product_name, price, category, description, user_id } = req.body;
+  const isMoreThanFour = await countUserProduct(user_id);
+  if (!isMoreThanFour) {
+    res.status(422).json({
+      status: "error",
+      message: "You can only upload 4 products",
+    });
+    return;
+  }
+
   const image = req.file ? req.file.filename : "";
   const productCreate = await Products.create({
     product_name,
@@ -53,6 +55,24 @@ const createProducts = async (req, res) => {
       productCreate,
     },
   });
+};
+
+const getProducts = async (req, res) => {
+  const products = await Products.findAll()
+    .then((Products) => {
+      res.status(201).json({
+        status: "list success",
+        data: {
+          Products,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
 };
 
 const deleteProducts = async (req, res) => {
