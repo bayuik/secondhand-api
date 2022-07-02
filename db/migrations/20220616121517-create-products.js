@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       category: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('Hobi', 'Kendaraan', 'Baju', 'Elektronik', 'Kesehatan')
       },
       description: {
         type: Sequelize.TEXT

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Users } = require("../models");
+const {Users} = require("../models");
 const secretKey = process.env.SECRET_KEY || "This is a secret key";
 
 const checkPassword = (encryptedPassword, password) => {
@@ -18,7 +18,7 @@ const checkPassword = (encryptedPassword, password) => {
 const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h" });
 
 const login = async (req, res) => {
-  const user = await Users.findOne({ where: { email: req.body.email } });
+  const user = await Users.findOne({where: {email: req.body.email}});
 
   if (!user) {
     res.status(404).json({
@@ -45,24 +45,16 @@ const login = async (req, res) => {
     phone,
     photo,
     role,
-  }).then((token) => {
-    res
-      .status(201)
-      .json({
-        status: "success",
-        data: {
-          name,
-          email,
-          token,
-        },
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: "error",
-          message: err.message,
-        });
-      });
   });
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      name,
+      email,
+      token
+    },
+  })
 };
 
 const authorize = async (req, res, next) => {

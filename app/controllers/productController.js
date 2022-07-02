@@ -17,22 +17,21 @@ const deleteImage = async (id) => {
 };
 
 const getProducts = async (req, res) => {
-  const products = await Products.findAll().then((Products) => {
-    res
-      .status(201)
-      .json({
+  const products = await Products.findAll()
+    .then((Products) => {
+      res.status(201).json({
         status: "list success",
         data: {
-          products,
+          Products,
         },
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: "error",
-          message: err.message,
-        });
       });
-  });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
 };
 
 const createProducts = async (req, res) => {
@@ -116,27 +115,26 @@ const updateProducts = async (req, res) => {
 
 const getDetailProduct = async (req, res) => {
   let { id } = req.params;
-  const products = await Products.findOne({ where: { id: id } }).then((Products) => {
-    res
-      .status(201)
-      .json({
+  const products = await Products.findOne({ where: { id: id } })
+    .then((Products) => {
+      res.status(201).json({
         status: "Success",
         data: {
-          products,
+          Products,
         },
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: "error",
-          message: err.message,
-        });
       });
-  });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
 };
 
 const getUserProducts = async (req, res) => {
   let { userId } = req.params;
-  const products = await Products.findOne({
+  const products = await Products.findAll({
     where: {
       user_id: parseInt(userId),
     },
