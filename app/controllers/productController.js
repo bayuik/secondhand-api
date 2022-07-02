@@ -17,12 +17,21 @@ const deleteImage = async (id) => {
 };
 
 const getProducts = async (req, res) => {
-  const products = await Products.findAll();
-  res.status(201).json({
-    status: "list success",
-    data: {
-      products,
-    },
+  const products = await Products.findAll().then((Products) => {
+    res
+      .status(201)
+      .json({
+        status: "list success",
+        data: {
+          products,
+        },
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "error",
+          message: err.message,
+        });
+      });
   });
 };
 
@@ -56,12 +65,20 @@ const deleteProducts = async (req, res) => {
   }).then((Products) => {
     return Products;
   });
-  res.status(201).json({
-    status: "delete success",
-    data: {
-      productDelete,
-    },
-  });
+  res
+    .status(201)
+    .json({
+      status: "delete success",
+      data: {
+        productDelete,
+      },
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
 };
 
 const updateProducts = async (req, res) => {
@@ -99,30 +116,46 @@ const updateProducts = async (req, res) => {
 
 const getDetailProduct = async (req, res) => {
   let { id } = req.params;
-  const products = await Products.findOne({ where: { id: id } });
-  res.status(201).json({
-    status: "Success",
-    data: {
-      products,
-    },
+  const products = await Products.findOne({ where: { id: id } }).then((Products) => {
+    res
+      .status(201)
+      .json({
+        status: "Success",
+        data: {
+          products,
+        },
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "error",
+          message: err.message,
+        });
+      });
   });
 };
 
 const getUserProducts = async (req, res) => {
-  let {userId} = req.params;
-  console.log(userId);
-  const products = await Products.findAll({
+  let { userId } = req.params;
+  const products = await Products.findOne({
     where: {
-      user_id: userId,
-    }
-  })
-  res.status(201).json({
-    status: "Success",
-    data: {
-      products,
+      user_id: parseInt(userId),
     },
   })
-}
+    .then((Products) => {
+      res.status(201).json({
+        status: "Success",
+        data: {
+          Products,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
+};
 
 module.exports = {
   getProducts,
