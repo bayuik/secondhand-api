@@ -4,7 +4,6 @@ const path = require("path");
 const { Deta } = require("deta");
 const deta = Deta("c0x1nrki_LhQt95CaBmmsQ31B6TJJbWr8KdHww6yp");
 const drive = deta.Drive("c0x1nrki");
-const base64Img = require("base64-img");
 
 const deleteImage = async (id) => {
   const product = await Products.findOne({
