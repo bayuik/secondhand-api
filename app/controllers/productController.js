@@ -54,15 +54,21 @@ const createProducts = async (req, res) => {
     description,
     product_photo: image,
     user_id,
-  }).then((Products) => {
-    return Products;
-  });
-  res.status(201).json({
-    status: "create success",
-    data: {
-      productCreate,
-    },
-  });
+  })
+    .then((Products) => {
+      res.status(201).json({
+        status: "create success",
+        data: {
+          productCreate,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: "error",
+        message: err,
+      });
+    });
 };
 
 const getProducts = async (req, res) => {
