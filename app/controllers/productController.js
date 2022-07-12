@@ -43,8 +43,8 @@ const createProducts = async (req, res) => {
   }
 
   const image = req.file ? req.file.filename : "";
-  // const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
-  // const img = await drive.put(image, { path: contents });
+  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  const img = await drive.put(image, { path: contents });
 
   const productCreate = await Products.create({
     product_name,
