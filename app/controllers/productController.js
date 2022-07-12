@@ -59,7 +59,7 @@ const createProducts = async (req, res) => {
       res.status(201).json({
         status: "create success",
         data: {
-          productCreate,
+          Products,
         },
       });
     })
@@ -100,7 +100,7 @@ const deleteProducts = async (req, res) => {
       res.status(201).json({
         status: "delete success",
         data: {
-          productDelete,
+          Products,
         },
       });
     })
