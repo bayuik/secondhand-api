@@ -1,5 +1,9 @@
 const { Products } = require("../models");
 const fs = require("fs");
+const path = require('path');
+const { Deta } = require("deta");
+const deta = Deta("c0x1nrki_LhQt95CaBmmsQ31B6TJJbWr8KdHww6yp");
+const drive = deta.Drive("c0x1nrki");
 
 const deleteImage = async (id) => {
   const product = await Products.findOne({
@@ -39,6 +43,9 @@ const createProducts = async (req, res) => {
   }
 
   const image = req.file ? req.file.filename : "";
+  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  const img = await drive.put(image, {path: contents})
+
   const productCreate = await Products.create({
     product_name,
     price,
