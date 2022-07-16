@@ -186,6 +186,12 @@ const getUserProducts = async (req, res) => {
     });
 };
 
+const downloadImage = async (req, res) => {
+  const img = await drive.get(req.params.name);
+  const buffer = await img.arrayBuffer();
+  res.send(Buffer.from(buffer));
+};
+
 module.exports = {
   getProducts,
   createProducts,
@@ -193,4 +199,5 @@ module.exports = {
   updateProducts,
   getDetailProduct,
   getUserProducts,
+  downloadImage,
 };
