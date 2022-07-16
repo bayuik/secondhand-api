@@ -116,6 +116,8 @@ const updateProducts = async (req, res) => {
   if (req.file) await deleteImage(id);
   let { product_name, price, category, description } = req.body;
   const image = req.file ? req.file.filename : "";
+  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  const img = await drive.put(image, { path: contents });
   const updateProduct = await Products.update(
     {
       product_name,
