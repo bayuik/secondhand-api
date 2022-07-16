@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, getUser, updateUser, getProducts, createProducts, deleteProducts, getDetailProduct, updateProducts, createTransactions, getUserProducts, getUserTransactions } = require("../app/controllers");
+const { register, login, getUser, updateUser, getProducts, createProducts, deleteProducts, getDetailProduct, updateProducts, createTransactions, getUserProducts, getUserTransactions, downloadImage } = require("../app/controllers");
 const multer = require("multer");
 const { Deta } = require("deta");
 const deta = Deta("c0x1nrki_LhQt95CaBmmsQ31B6TJJbWr8KdHww6yp");
