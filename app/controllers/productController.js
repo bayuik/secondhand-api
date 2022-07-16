@@ -146,6 +146,9 @@ const updateProducts = async (req, res) => {
 
 const getDetailProduct = async (req, res) => {
   let { id } = req.params;
+  const img = await drive.get("1657586950887.jpg");
+  const buffer = await img.arrayBuffer();
+  res.send(Buffer.from(buffer));
 
   const products = await Products.findOne({ where: { id: id } })
     .then((Products) => {
