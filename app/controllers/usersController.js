@@ -89,14 +89,14 @@ const updateUser = async (req, res) => {
   if (req.file) await deleteImage(id);
   const { name, city, address, phone } = req.body;
   const image = req.file ? req.file.filename : Date.now();
-  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
-  const img = await drive.put(image, { path: contents });
+  // const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  // const img = await drive.put(image, { path: contents });
   const updateUser = {
     name,
     city,
     address,
     phone,
-    photo: image,
+    // photo: image,
   };
 
   Users.update(updateUser, {
