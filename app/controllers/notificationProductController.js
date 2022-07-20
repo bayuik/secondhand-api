@@ -1,16 +1,21 @@
-const { NotifsProducts } = require("../models");
+
+const { NotificationsProducts } = require("../models");
 
 const createNotificationProduct = async (req, res) => {
-  const { products_id, user_id} = req.body;
-  const notificationProductCreate = await NotifsProducts.create({
-    products_id,
+  const { product_name, price, category, user_id} = req.body;
+  const image = req.file ? req.file.filename : "";
+  const notificationProductCreate = await NotificationsProducts.create({
+    product_name,
+    price,
+    category,
+    product_photo: image,
     user_id
   })
-  .then((NotifsProducts) => {
+  .then((NotificationsProducts) => {
     res.status(201).json({
       status: "create success",
       data: {
-        NotifsProducts,
+        NotificationsProducts,
       },
     });
   })
@@ -23,12 +28,12 @@ const createNotificationProduct = async (req, res) => {
 };
 
 const getNotificationProducts = async (req, res) => {
-    const notifications = await NotifsProducts.findAll()
-    .then((NotifsProducts) => {
+    const notifications = await NotificationsProducts.findAll()
+    .then((NotificationsProducts) => {
       res.status(201).json({
         status: "list success",
         data: {
-          NotifsProducts,
+          NotificationsProducts,
         },
       });
     })
