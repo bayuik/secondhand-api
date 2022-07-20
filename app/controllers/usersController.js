@@ -2,11 +2,7 @@ const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const fs = require("fs");
-const path = require("path");
-const { Deta } = require("deta");
-const deta = Deta("c0x1nrki_LhQt95CaBmmsQ31B6TJJbWr8KdHww6yp");
-const drive = deta.Drive("c0x1nrki");
-
+let path = require("path");
 
 const encryptPassword = (password) => {
   return new Promise((resolve, reject) => {
@@ -88,9 +84,7 @@ const updateUser = async (req, res) => {
   const { id } = req.params;
   if (req.file) await deleteImage(id);
   const { name, city, address, phone } = req.body;
-  const image = req.file ? req.file.filename : Date.now();
-  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
-  const img = await drive.put(image, { path: contents });
+  const image = req.file ? req.file.filename : "";
   const updateUser = {
     name,
     city,
