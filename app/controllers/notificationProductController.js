@@ -1,3 +1,4 @@
+
 const { NotificationsProducts } = require("../models");
 
 const createNotificationProduct = async (req, res) => {
