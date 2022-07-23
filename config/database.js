@@ -13,11 +13,12 @@ const {
   },
 } = process.env;
 
+
 module.exports = {
   development: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}`,
+    database: DB_NAME,
     host: DB_HOST,
     dialect: DB_DIALECT,
     dialectOptions: DB_SSL,
@@ -25,7 +26,7 @@ module.exports = {
   test: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}`,
+    database: DB_NAME,
     host: DB_HOST,
     dialect: DB_DIALECT,
     dialectOptions: DB_SSL,
@@ -33,7 +34,7 @@ module.exports = {
   production: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}`,
+    database: DB_NAME,
     host: DB_HOST,
     dialect: DB_DIALECT,
     dialectOptions: DB_SSL,
