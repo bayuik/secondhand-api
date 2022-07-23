@@ -17,6 +17,7 @@ const {
   createNotificationProduct,
   getNotificationTransactions,
   createNotificationTransactions,
+  downloadImage,
 } = require("../app/controllers");
 const multer = require("multer");
 
