@@ -1,7 +1,7 @@
 const { register, getUser, updateUser } = require("./usersController");
 const { login, authorize } = require("./authController");
 const { createTransactions, getUserTransactions } = require("./transactionController");
-const { getProducts, createProducts, deleteProducts, getDetailProduct, updateProducts, getUserProducts } = require("./productController");
+const { getProducts, createProducts, deleteProducts, getDetailProduct, updateProducts, getUserProducts, downloadImage } = require("./productController");
 const {getNotificationProducts, createNotificationProduct} = require('./notificationProductController')
 const {getNotificationTransactions, createNotificationTransactions} = require('./notificationTransactionController')
 module.exports = {
@@ -21,5 +21,6 @@ module.exports = {
   getNotificationProducts,
   createNotificationProduct,
   getNotificationTransactions,
-  createNotificationTransactions
+  createNotificationTransactions,
+  downloadImage
 };
