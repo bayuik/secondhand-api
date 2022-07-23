@@ -1,10 +1,16 @@
 const {
-  DB_USERNAME = "auhirraabthxnr",
-  DB_PASSWORD = "2c490548120d47eb6d89be15aade9962b1cb7385fe5d48b91711bf6611bbdef0",
-  DB_HOST = "ec2-54-86-224-85.compute-1.amazonaws.com",
-  DB_NAME = "dqf1h0krnuc26",
+  DB_USERNAME = "pgrevvpedwtxuy",
+  DB_PASSWORD = "8a78817cefc077d46f4b3d6d7e3408fc97a143e028887d31711db3ae69c23c5b",
+  DB_HOST = "ec2-54-158-247-210.compute-1.amazonaws.com",
+  DB_NAME = "d92nie6j3rpima",
   DB_DIALECT = "postgres",
   DB_PORT = "5432",
+  DB_SSL = {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 } = process.env;
 
 module.exports = {
@@ -14,12 +20,7 @@ module.exports = {
     database: `${DB_NAME}`,
     host: DB_HOST,
     dialect: DB_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions: DB_SSL,
   },
   test: {
     username: DB_USERNAME,
@@ -27,12 +28,7 @@ module.exports = {
     database: `${DB_NAME}`,
     host: DB_HOST,
     dialect: DB_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions: DB_SSL,
   },
   production: {
     username: DB_USERNAME,
@@ -40,11 +36,6 @@ module.exports = {
     database: `${DB_NAME}`,
     host: DB_HOST,
     dialect: DB_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions: DB_SSL,
   },
 };
