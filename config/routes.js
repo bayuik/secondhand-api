@@ -1,8 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, getUser, updateUser, getProducts, createProducts, deleteProducts, 
-  getDetailProduct, updateProducts, createTransactions, getUserProducts, getUserTransactions,
-   getNotificationProducts, createNotificationProduct, getNotificationTransactions, createNotificationTransactions } = require("../app/controllers");
+const {
+  register,
+  login,
+  getUser,
+  updateUser,
+  getProducts,
+  createProducts,
+  deleteProducts,
+  getDetailProduct,
+  updateProducts,
+  createTransactions,
+  getUserProducts,
+  getUserTransactions,
+  getNotificationProducts,
+  createNotificationProduct,
+  getNotificationTransactions,
+  createNotificationTransactions,
+} = require("../app/controllers");
 const multer = require("multer");
 
 let storage = multer.diskStorage({

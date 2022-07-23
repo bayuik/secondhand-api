@@ -32,8 +32,7 @@ const countUserProduct = async (userId) => {
 };
 
 const createProducts = async (req, res) => {
-  const { product_name, price, category, description, user_id } = req.body;
-  const image = req.file ? req.file.filename : "";
+  let { product_name, price, category, description, user_id } = req.body;
   const isMoreThanFour = await countUserProduct(user_id);
   if (!isMoreThanFour) {
     res.status(422).json({
@@ -42,6 +41,11 @@ const createProducts = async (req, res) => {
     });
     return;
   }
+
+  const image = req.file ? req.file.filename : "";
+  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  const img = await drive.put(image, { path: contents });
+
   const productCreate = await Products.create({
     product_name,
     price,
@@ -112,6 +116,8 @@ const updateProducts = async (req, res) => {
   if (req.file) await deleteImage(id);
   let { product_name, price, category, description } = req.body;
   const image = req.file ? req.file.filename : "";
+  const contents = `${path.join(__dirname, "../../uploads")}/${image}`;
+  const img = await drive.put(image, { path: contents });
   const updateProduct = await Products.update(
     {
       product_name,
@@ -142,7 +148,6 @@ const updateProducts = async (req, res) => {
 
 const getDetailProduct = async (req, res) => {
   let { id } = req.params;
-
   const products = await Products.findOne({ where: { id: id } })
     .then((Products) => {
       res.status(201).json({
@@ -183,6 +188,12 @@ const getUserProducts = async (req, res) => {
     });
 };
 
+const downloadImage = async (req, res) => {
+  const img = await drive.get(req.params.name);
+  const buffer = await img.arrayBuffer();
+  res.send(Buffer.from(buffer));
+};
+
 module.exports = {
   getProducts,
   createProducts,
@@ -190,4 +201,5 @@ module.exports = {
   updateProducts,
   getDetailProduct,
   getUserProducts,
+  downloadImage,
 };
