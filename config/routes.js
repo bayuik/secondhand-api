@@ -41,4 +41,6 @@ router.get("/my-products/:userId", getUserProducts);
 router.route("/history/:userId").get(getUserTransactions);
 router.route("/notifProduct").get(getNotificationProducts).post(createNotificationProduct);
 router.route("/notifTransaction").get(getNotificationTransactions).post(createNotificationTransactions);
+router.get("/download/:name", downloadImage);
+
 module.exports = router;
