@@ -23,23 +23,46 @@ const createNotificationTransactions = async (req, res) => {
 
 const getNotificationTransactions = async (req, res) => {
   const notifications = await NotificationsTransactions.findAll()
-  .then((NotificationsTransactions) => {
-    res.status(201).json({
-      status: "list success",
-      data: {
-        NotificationsTransactions,
+    .then((NotificationsTransactions) => {
+      res.status(201).json({
+        status: "list success",
+        data: {
+          NotificationsTransactions,
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err,
+      });
+    });
+};
+
+const getNotificationByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const notifications = await NotificationsTransactions.findAll({
+      where: {
+        user_id : userId,
       },
     });
-  })
-  .catch((err) => {
-    res.status(422).json({
+    res.status(200).json({
+      status: "success",
+      data: {
+        notifications,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
       status: "error",
       message: err,
     });
-  });
+  }
 };
 
 module.exports = {
   createNotificationTransactions,
   getNotificationTransactions,
+  getNotificationByUserId,
 };
