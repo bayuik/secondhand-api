@@ -1,11 +1,13 @@
 const { Transaction } = require("../models");
 
 const createTransactions = async (req, res) => {
-  const { harga_tawar, products_id, user_id } = req.body;
+  const { harga_tawar, products_id, user_id, status, product_owner } = req.body;
   const transactionCreate = await Transaction.create({
     harga_tawar,
     products_id,
     user_id,
+    status,
+    product_owner,
   })
     .then((Transactions) => {
       res.status(201).json({

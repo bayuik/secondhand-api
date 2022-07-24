@@ -14,6 +14,9 @@ module.exports = {
       status: {
         type: Sequelize.ENUM("Tawar", "Dibatalkan", "Diterima", "Ditolak"),
       },
+      product_owner: {
+        type: Sequelize.INTEGER,
+      },
       products_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
