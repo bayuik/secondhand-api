@@ -44,8 +44,10 @@ const getNotificationByUserId = async (req, res) => {
     const { userId } = req.params;
     const notifications = await NotificationsTransactions.findAll({
       where: {
-        user_id : userId,
+        user_id: userId,
       },
+      order: [["createdAt", "DESC"]],
+      limit: 4,
     });
     res.status(200).json({
       status: "success",
