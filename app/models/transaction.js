@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Transaction.init(
     {
       harga_tawar: DataTypes.INTEGER,
-      status: Datatypes.ENUM("Tawar", "Dibatalkan", "Diterima", "Ditolak"),
+      status: DataTypes.ENUM("Tawar", "Dibatalkan", "Diterima", "Ditolak"),
       products_id: {
         type: DataTypes.INTEGER,
         references: {

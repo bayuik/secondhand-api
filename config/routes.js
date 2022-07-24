@@ -40,7 +40,7 @@ router.route("/product").get(getProducts).post(upload.single("product_photo"), c
 router.route("/product/:id").get(getDetailProduct).put(upload.single("product_photo"), updateProducts).delete(deleteProducts);
 router.post("/transaction", createTransactions);
 router.get("/my-products/:userId", getUserProducts);
-router.route("/history/:userId").get(getUserTransactions);
+router.route("/transaction/:userId").get(getUserTransactions);
 router.route("/notifProduct").get(getNotificationProducts).post(createNotificationProduct);
 router.route("/notifTransaction").get(getNotificationTransactions).post(createNotificationTransactions);
 router.route("/notification/:userId").get(getNotificationByUserId);

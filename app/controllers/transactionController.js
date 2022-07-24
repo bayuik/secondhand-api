@@ -25,6 +25,8 @@ const getUserTransactions = async (req, res) => {
   let { user_id } = req.params;
   const userTransactions = await Transaction.findAll({
     where: user_id,
+    order: [["createdAt", "DESC"]],
+    limit: 4,
   })
     .then((Transactions) => {
       res.status(201).json({
