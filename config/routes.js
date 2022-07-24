@@ -19,6 +19,7 @@ const {
   createNotificationTransactions,
   downloadImage,
   getNotificationByUserId,
+  confirmTransaction,
 } = require("../app/controllers");
 const multer = require("multer");
 
@@ -39,6 +40,7 @@ router.route("/profile/:id").get(getUser).put(upload.single("photo"), updateUser
 router.route("/product").get(getProducts).post(upload.single("product_photo"), createProducts);
 router.route("/product/:id").get(getDetailProduct).put(upload.single("product_photo"), updateProducts).delete(deleteProducts);
 router.post("/transaction", createTransactions);
+router.route("/confirm/:id").put(confirmTransaction);
 router.get("/my-products/:userId", getUserProducts);
 router.route("/transaction/:userId").get(getUserTransactions);
 router.route("/notifProduct").get(getNotificationProducts).post(createNotificationProduct);

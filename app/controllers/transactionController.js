@@ -46,7 +46,34 @@ const getUserTransactions = async (req, res) => {
     });
 };
 
+const confirmTransaction = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const transaction = await Transaction.findOne({
+    where: {
+      id,
+    },
+  })
+    .then((Transactions) => {
+      Transactions.update({
+        status,
+      });
+
+      res.status(200).json({
+        message: "Transaction updated successfully",
+        Transactions,
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "error",
+        message: err.message,
+      });
+    });
+};
+
 module.exports = {
   createTransactions,
   getUserTransactions,
+  confirmTransaction,
 };
